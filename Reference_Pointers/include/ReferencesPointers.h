@@ -13,6 +13,10 @@
 
 namespace references_pointers{
 
+    void introduction_to_references();
+
+    void reference_exercise();
+
     void print_string_by_reference(const std::string& str);
 
     void print_val_and_ref_address(int val, int& ref);

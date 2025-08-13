@@ -12,6 +12,7 @@
 // programa (ejecutable)
 
 int main(int argc, char* argv[]) {
+
     if (argc < 2) {
         std::cerr << "Uso: " << argv[0] << " <funcion> [parametros...]\n";
         return 1;
@@ -48,6 +49,12 @@ int main(int argc, char* argv[]) {
     }
     else if (comando == "pointer_verification_example") {
         references_pointers::pointer_verification_example();
+    }
+    else if (comando == "introduction_to_references") {
+        references_pointers::introduction_to_references();
+    }
+    else if (comando == "reference_exercise") {
+        references_pointers::reference_exercise();
     }
     else {
         std::cerr << "Funcion no reconocida: " << comando << "\n";

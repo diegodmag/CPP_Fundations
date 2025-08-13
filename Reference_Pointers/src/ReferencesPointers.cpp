@@ -8,6 +8,38 @@
 // -->   https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/
 
 
+// Lvalues and Rvalues
+
+void references_pointers::introduction_to_references(){
+    int x { 5 };
+    int y { 6 };
+
+    int& ref { x }; // ref is now an alias for x
+
+    ref = y; // assigns 6 (the value of y) to x (the object being referenced by ref)
+    // The above line does NOT change ref into a reference to variable y!
+
+    std::cout << x << '\n'; // user is expecting this to print 5
+}
+
+void references_pointers::reference_exercise(){
+    int x{ 1 };
+    int& ref{ x };
+
+    std::cout << x << ref << '\n';
+
+    int y{ 2 };
+    ref = y;
+    y = 3;
+
+    std::cout << x << ref << '\n';
+
+    x = 4;
+
+    std::cout << x << ref << '\n';
+}
+
+
 /**
  * Introduction to passing by value, reference and address 
  * 
