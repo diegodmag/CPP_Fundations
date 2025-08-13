@@ -13,7 +13,6 @@ Un *Compound data types* o un tipo de dato compuesto en C++ es un tipo que se de
 - Class types (`structs`, `classes` and `unions`)
 
 
-
 ### Introducción a paso por valor, paso por referencia y por dirección. 
 
 Cuando un objeto es pasado por valor, el parametro de la funcion recibe una copia del argumento. Esto significa que cualquier cambio al valor del parametros es realizado a la copia del argumento, no al argumento mismo. 
@@ -48,3 +47,21 @@ int main(){
     prinInt(x); // El argumento es el objeto mismo (x) y no se realiza ninguna copia, la funcion opera sobre x
 }
 ```
+
+**[Ver función print_val_and_ref_address_example](../src/ReferencesPointers.cpp#L82)**
+
+**Ejecutar función con**`./build/references_and_pointers print_val_and_ref_address_example`
+
+**BES PRACTICE:** Un parametro declarado como referencia constante, tiene las mismas ventajas de acceder al objeto que se está referenciando a la vez que se impide que sea modificado. 
+
+
+**[Ver función const_reference_bidings](../src/ReferencesPointers.cpp#L105)**
+
+**Ejecutar función con**`./build/references_and_pointers const_reference_bidings`
+
+
+## Paso por valor VS Paso por referencia 
+
+- Los tipos de datos fundamentales y los `enumerated types` con *baratos* de copiar, por lo que típicamente son pasados por valor.
+
+- Los tipos de datos de Clase pueden ser *caros* de copiar, por lo que típicamente son pasados por referencia constante (`const`).
