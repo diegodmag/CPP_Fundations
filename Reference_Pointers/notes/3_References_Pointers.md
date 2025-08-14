@@ -206,7 +206,7 @@ Se puede realizar una verificación sobre si un puntero es nulo de la siguiente 
     std::cout << "nullPtr is " << (nullPtr ? "non-null\n" : "null\n"); // implicit conversion to Boolean
 ```
 
-**[Ver función intro_to_pointers](../src/ReferencesPointers.cpp#385)**
+**[Ver función pointer_verification_example](../src/ReferencesPointers.cpp#385)**
 
 **Ejecutar función con**`./build/references_and_pointers pointer_verification_example`
 
@@ -219,3 +219,72 @@ Un puntero debería o tener asignado un valor válido, es decir, una dirección 
 **BEST PRACTICE:**
 Favorece el uso de referencias sobre los punteros a menos que alguna de las capacidades adicionales de los punteros sea requerida.
 
+
+### Punteros y `const`
+
+Con los punteros normales y utilizando el `dereference operator` podemos cambiar el valor al que esta apuntando. Sin embargo que ocurre si el valor al que busca apuntar es un `const`?
+
+```cpp
+    const int x { 5 }; // x is now const
+    int* ptr { &x };   // compile error: cannot convert from const int* to int*
+
+```
+
+No podemos asignar un puntero normal para que apunte a una variable `const`. Esto hace sentido ya que una variable `const` es aquella cuyo valor no puede ser cambiado. Permitir que el programador asigne a un puntero normal la dirección de una variable `const`, permitiría que se usara el `dereference operator` para cambiar el valor de en esa dirección y por lo tanto cambiar la variable. Eso iría en contra del `const` de la variable.
+
+**Puntero a un valor `const`**
+
+Para declarar un puntero a un valor constante, se hace: 
+
+```cpp
+    const int x{ 5 };
+    const int* ptr { &x }; // okay: ptr is pointing to a "const int"
+
+    *ptr = 6; // not allowed: we can't change a const value
+```
+
+Sin embargo, porque un puntero a `const` no es en sí mismo `const` (solo apunta a un valor de `const`), podemos cambiar lo que el puntero está apuntando asignando al puntero una nueva dirección:
+
+```cpp
+    const int x{ 5 };
+    const int* ptr { &x }; // ptr points to const int x
+
+    const int y{ 6 };
+    ptr = &y; // okay: ptr now points at const int y
+```
+
+Al igual que una referencia a `const`, un puntero a `const` también puede apuntar a variables `no-const`. Un puntero a `const` trata el valor apuntado como constante, independientemente de si el objeto en esa dirección se definió inicialmente como `const` o no:
+
+```cpp
+    int x{ 5 }; // non-const
+    const int* ptr { &x }; // ptr points to a "const int"
+
+    *ptr = 6;  // not allowed: ptr points to a "const int" so we can't change the value through ptr
+    x = 6; // allowed: the value is still non-const when accessed through non-const identifier x    
+```
+
+**FINAL REMINDER ABOUT POINTERS AND CONST**
+
+- A un puntero no `const` (`ptr. int* ptr`) se le puede asignar otra dirección para cambiar lo que está señalando.
+- Un puntero `const` (p.e. `int* const ptr`) siempre apunta a la misma dirección, y esta dirección no se puede cambiar.
+- Un puntero a un valor no `const` (p.e. int* ptr) puede cambiar el valor al que apunta. Estos no pueden apuntar a un valor const.
+
+Un puntero a un valor `const` (e.g. `const int* ptr`) trata el valor como `const` cuando se accede a través del puntero, y por lo tanto no puede cambiar el valor al que está apuntando. Estos pueden ser dirigidos a `const` o `no-const` l-values (pero no a r-values, que no tienen dirección).
+
+**ABOUT SYNTAX:**
+```cpp
+int main()
+{
+    int v{ 5 };
+
+    int* ptr0 { &v };             // points to an "int" but is not const itself.  We can modify the value or the address.
+    const int* ptr1 { &v };       // points to a "const int" but is not const itself.  We can only modify the address.
+    int* const ptr2 { &v };       // points to an "int" and is const itself.   We can only modify the value.
+    const int* const ptr3 { &v }; // points to a "const int" and is const itself.  We can't modify the value nor the address.
+
+    // if the const is on the left side of the *, the const belongs to the value
+    // if the const is on the right side of the *, the const belongs to the pointer
+
+    return 0;
+}
+```
