@@ -258,6 +258,17 @@ class Employee
     int m_age {};
 
 public:
+
+    // Employee() = default; 
+
+    Employee():
+         m_name{"Generico"}
+        ,m_age{30}
+    {
+
+    } 
+        
+
 	void setName(std::string_view name) { m_name = name; }
     void setAge(int age){m_age=age;}
     void fillInformation(){
@@ -380,7 +391,12 @@ void example_of_dangling_reference(){
 
 int main()
 {
- 
+    Employee emp{};
+    // Employee emp();
+
+    emp.fillInformation();
+    std::cout << emp.getInformation() << '\n';
+
     // DateClassWithAccessSpecifier date_not_initialized {};
     // date_not_initialized.print();
     
@@ -390,7 +406,7 @@ int main()
 
     // getter_by_const_reference();
 
-    cases_for_data_members_for_rvalue();
+    //cases_for_data_members_for_rvalue();
 
     // example_of_dangling_reference();
 

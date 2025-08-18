@@ -2,20 +2,23 @@
 
 ## Primeros pasos
 
-Cmake es un *cross platform meta build system*, el cual **no compila** el códidgo, si no que genera los scripts nativos para cualquiera que sea el compilador que se está usando para después, usar esos archivos para generar el build. La idea es que, al escribir un archivo CMake, este se encarga de generar la configuración para la plataforma en la que se está usando. Esto significa que es posible construir los proyectos de C++ en Linux, Windows, Mac, etc usando el mismo `CmakeLists.txt. 
+Cmake es un *cross platform meta build system* que genera los scripts nativos para cualquiera que sea el compilador que se está usando para después, usar esos archivos para generar el build. La idea es que, al escribir un archivo CMake, este se encarga de generar la configuración para la plataforma en la que se está usando. Esto significa que es posible construir los proyectos de C++ en Linux, Windows, Mac, etc usando el mismo `CmakeLists.txt. 
 
 A grandes rasgos, el trabajo de Cmake es **generar instrucciones para el build** para el compilador y para la plataforma. 
 
 ### Configurando el ambiente de trabajo
 
-- Instalación de `Cmake`: 
-```bash 
-    sudo apt install cmake
-```
 
 - Instalar el compilador `GCC`(GNU Compiler Collection) para Debia, Ubuntu: 
 ```bash
+    sudo apt-get install build-essential 
+```
+```bash
     sudo apt-get install build-essential gdb cmake
+```
+- Instalación de `Cmake`: 
+```bash 
+    sudo apt install cmake
 ```
 
 ### Mi primer proyecto con Cmake 
@@ -24,6 +27,60 @@ Cualquier proyecto requiere al menos dos items:
 
 1. Al menos un archivo fuente que contenga el código del programa. 
 2. Un *build script* que contenga las instrucciones de como construir el proyecto. 
+
+En general hay dos fases para construir el proyecto: 
+
+1. Configuración: En esta fase Cmake lee el archivo `CMakeLists.txt` y genera una carpeta `build` con las reglas establecidas en `CMakeLists.txt`. 
+2. Generación: Se generan los binarios del proyecto entre ellos el archivo ejecutable a partir de `build`. 
+
+```bash
+├── CMakeLists.txt
+├── build
+│   ├── CMakeCache.txt
+│   ├── CMakeFiles
+│   │   ├── 3.30.0-rc4
+│   │   │   ├── CMakeCCompiler.cmake
+│   │   │   ├── CMakeCXXCompiler.cmake
+│   │   │   ├── CMakeDetermineCompilerABI_C.bin
+│   │   │   ├── CMakeDetermineCompilerABI_CXX.bin
+│   │   │   ├── CMakeSystem.cmake
+│   │   │   ├── CompilerIdC
+│   │   │   │   ├── CMakeCCompilerId.c
+│   │   │   │   ├── a.out
+│   │   │   │   └── tmp
+│   │   │   └── CompilerIdCXX
+│   │   │       ├── CMakeCXXCompilerId.cpp
+│   │   │       ├── a.out
+│   │   │       └── tmp
+│   │   ├── CMakeConfigureLog.yaml
+│   │   ├── CMakeDirectoryInformation.cmake
+│   │   ├── Makefile.cmake
+│   │   ├── Makefile2
+│   │   ├── TargetDirectories.txt
+│   │   ├── cmake.check_cache
+│   │   ├── pkgRedirects
+│   │   ├── progress.marks
+│   │   └── project_organization.dir
+│   │       ├── DependInfo.cmake
+│   │       ├── build.make
+│   │       ├── cmake_clean.cmake
+│   │       ├── compiler_depend.make
+│   │       ├── compiler_depend.ts
+│   │       ├── depend.make
+│   │       ├── flags.make
+│   │       ├── link.txt
+│   │       ├── progress.make
+│   │       └── src
+│   ├── Makefile
+│   ├── cmake_install.cmake
+│   ├── compile_commands.json
+│   └── project_organization
+├── include
+│   └── Hello.h
+└── src
+    ├── Hello.cpp
+    └── Main.cpp
+```
 
 #### Escribiendo el primer `CMakeLists.txt`
 

@@ -1,6 +1,6 @@
-#include "Hello.h"
+#include <iostream>
 
 int main() {
-    printHello("Diego");
+    
     return 0;
 }

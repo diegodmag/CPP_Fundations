@@ -9,8 +9,11 @@
 // programa (ejecutable)
 
 #include "Hello.h"
+#include "Godbye.h"
 
 int main() {
     printHello("Diego");
+
+    printGodbye("Diego");
     return 0;
 }

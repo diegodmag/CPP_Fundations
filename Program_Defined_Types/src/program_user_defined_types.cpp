@@ -33,6 +33,8 @@ using Length = int; // define a type alias with identifier 'Length'
 // }
 
 
+
+
 ///What are user-defined / program-defined types?
 
 /**
@@ -53,6 +55,13 @@ using Length = int; // define a type alias with identifier 'Length'
 // 	int denominator {};
 // };
 
+/**
+ * Usando tipos definidos por el programa en un programa multiarchivo
+ * 
+ * 
+ */
+
+
 void showing_fraction_struct(){
     Fraction f { 3, 4 }; // this actually instantiates a Fraction object named f
 
@@ -66,6 +75,9 @@ void showing_fraction_struct(){
     std::cout << frac.numerator << "/" << frac.denominator << '\n';
 
 }
+
+
+
 
 
 // ENUMERATIONS 
