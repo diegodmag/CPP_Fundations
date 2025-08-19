@@ -27,6 +27,12 @@ namespace references_pointers{
 
     void const_reference_bidings();
 
+    int& return_by_reference(int& ref);
+
+    const int& return_by_const_reference(const int& ref);
+
+    void return_by_ref_example();
+
     void intro_to_pointers();
 
     void init_pointers();

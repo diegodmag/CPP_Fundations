@@ -35,6 +35,9 @@ int main(int argc, char* argv[]) {
     else if (comando == "const_reference_bidings") {
         references_pointers::const_reference_bidings();
     }
+    else if (comando == "return_by_ref_example"){
+        references_pointers::return_by_ref_example();
+    }
 
     
     // POINTERS

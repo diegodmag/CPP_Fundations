@@ -15,6 +15,21 @@ Un *Compound data types* o un tipo de dato compuesto en C++, es un tipo que se d
 
 ### Introducción a paso por valor, paso por referencia y por dirección. 
 
+Cómo sabemos que al modificar una referencia a un objeto modificamos el objeto? Por que tanto la referencia como el objeto tienen la misma dirección de memoria. 
+
+#### Operador `address-of(&)`
+El operador `address-of` obtiene la dirección de memoria de un objeto (típicamente un valor hexadecimal):
+
+```cpp
+int numero {5};
+std::cout << &numero << '\n';
+```
+`OUTPUT: `
+```
+0x7ffc557fae7c
+```
+
+
 Cuando un objeto es pasado por valor, el parametro de la funcion recibe una copia del argumento. Esto significa que cualquier cambio al valor del parametros es realizado a la copia del argumento, no al argumento mismo. 
 
 *Ejemplo de paso por valor*

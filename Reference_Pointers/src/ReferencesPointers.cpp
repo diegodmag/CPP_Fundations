@@ -11,10 +11,12 @@
 // Lvalues and Rvalues
 
 void references_pointers::introduction_to_references(){
-    int x { 5 };
-    int y { 6 };
+    int x { 5 }; // < lvalue 
+    int y { 6 }; //< - lvalue 
 
-    int& ref { x }; // ref is now an alias for x
+    y+= 1; //<- 
+
+    int& ref { x }; // ref is now an  alias for x
 
     ref = y; // assigns 6 (the value of y) to x (the object being referenced by ref)
     // The above line does NOT change ref into a reference to variable y!
@@ -23,18 +25,29 @@ void references_pointers::introduction_to_references(){
 }
 
 void references_pointers::reference_exercise(){
-    int x{ 1 };
-    int& ref{ x };
+    int x{ 1 }; // El objeto al que se referencia tiene que ser un lvalue 
+    int& ref{ x }; 
+    
+    const int z {5};    
+    const int& ref_to_z {z}; 
 
+    int w {40};
+    const int& refet_to_w {w}; // <-- 
+
+    //std::cout << x 
     std::cout << x << ref << '\n';
 
     int y{ 2 };
-    ref = y;
+    ref = y; 
+    // ref = x 
+    // ref = y -> x = y -> x = 2 
+    // ref = x = 2 
     y = 3;
+    
 
     std::cout << x << ref << '\n';
 
-    x = 4;
+    ref = 6;
 
     std::cout << x << ref << '\n';
 }
@@ -77,6 +90,8 @@ void references_pointers::print_string_by_reference(const std::string& str){
 void references_pointers::print_val_and_ref_address(int val, int& ref){
     std::cout << "The address of the value parameter is : " << &val << '\n';
     std::cout << "The address of the reference parameter is : " << &ref << '\n';
+
+    std::cout << ((&val == &ref)? "true" : "false") << '\n';
 }
 
 void references_pointers::print_val_and_ref_address_example(){
@@ -84,9 +99,12 @@ void references_pointers::print_val_and_ref_address_example(){
 
     int& num_ref {num_value};
 
+    
     std::cout << "The address of the value parameter is : " << &num_value << '\n';
     std::cout << "The address of the reference parameter is : " << &num_ref << '\n';
-
+    
+    std::cout << ((&num_value == &num_ref)? "true" : "false") << '\n';
+    
     std::cout << '\n';
 
     print_val_and_ref_address(num_value, num_ref);
@@ -116,11 +134,37 @@ void references_pointers::const_reference_bidings(){
     const int& ref_to_rvalue {5+10};
 
     
-    print_const_ref(ref_to_non_const);
+    print_const_ref(x);
 
     print_const_ref(ref_to_const);
 
     print_const_ref(ref_to_rvalue);
+
+}
+
+int& references_pointers::return_by_reference(int& ref){
+    return ref; 
+}
+
+const int& references_pointers::return_by_const_reference(const int& ref){
+    return ref; 
+}
+
+void references_pointers::return_by_ref_example(){
+
+    int num {45};
+
+    std::cout << "Value: " << num << " Address: "<< &num << '\n';
+
+    std::cout << "Ref Value: "<< return_by_reference(num) <<" Address: "  << &return_by_reference(num) << '\n';
+
+    return_by_reference(num) +=10; 
+
+    std::cout << "Const Ref Value: "<< return_by_const_reference(num) <<" Address: "  << &return_by_const_reference(num) << '\n';
+
+    std::cout << ((&num == &return_by_reference(num) && &return_by_reference(num) == &return_by_const_reference(num))? "true" : "false" )<< '\n';
+
+    // (bool) ? true : false
 
 }
 
