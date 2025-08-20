@@ -59,6 +59,12 @@ int main(int argc, char* argv[]) {
     else if (comando == "reference_exercise") {
         references_pointers::reference_exercise();
     }
+    else if (comando == "passing_by_address_example"){
+        references_pointers::passing_by_address_example();
+    } 
+    else if (comando == "return_by_address_example"){
+        references_pointers::return_by_address_example();
+    }
     else {
         std::cerr << "Funcion no reconocida: " << comando << "\n";
         return 1;

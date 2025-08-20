@@ -33,9 +33,14 @@ namespace references_pointers{
 
     void return_by_ref_example();
 
+
+
+
     void intro_to_pointers();
 
     void init_pointers();
+
+    void null_ptrs();
 
     void handling_const_pointers();
 
@@ -56,6 +61,22 @@ namespace references_pointers{
     void pointer_verification_example();
 
     void printIDNumber(const int* id=nullptr);
+
+    // Passing by address 
+    void passing_by_adress(int* ptr);
+
+    void passing_by_adress_const(const int* ptr);
+
+    void passing_by_address_example();
+
+    // Returning by address 
+    int* return_by_address(int* ptr);
+
+    const int* return_by_address_const(const int* ptr);
+
+    void return_by_address_example();
+
+
 
     void nullify( int*& refptr);
 

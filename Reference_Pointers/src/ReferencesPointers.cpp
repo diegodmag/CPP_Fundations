@@ -193,7 +193,11 @@ void references_pointers::return_by_ref_example(){
 
 
 
-// INTRO TO POINTERS (PASS BY ADREESS)
+
+/**
+ * POINTERS:
+ */
+// (PASS BY ADREESS)
 
 
 /**
@@ -227,7 +231,6 @@ void references_pointers::intro_to_pointers(){
 
     int* ptr_y {&y}; //pointer
 
-
     std::cout << "The reference to the variable " << ref_y << '\n';
     
     std::cout << "The address of the variable " << &y << '\n';
@@ -237,6 +240,9 @@ void references_pointers::intro_to_pointers(){
     std::cout << "The pointer that stores the value's address: " << ptr_y << '\n';
 
     std::cout << "The de-refered value from the pointer : " << *ptr_y << '\n';
+
+    // Could be a good example
+    //null_ptrs();
 
 }
 
@@ -256,29 +262,6 @@ void references_pointers::intro_to_pointers(){
  * /
 
 
-void handling_pointers(){
-
-    // int x{5};
-    // int * ptr; 
-    // ptr = &x; 
-
-    // std::cout << "x " << x << '\n';
-
-    // *ptr *= 3; 
-
-    // std::cout << "x " << x << '\n';
-
-    char* chPtr{};        // chars are 1 byte
-    int* iPtr{};          // ints are usually 4 bytes
-    long double* ldPtr{}; // long doubles are usually 8 or 12 bytes
-
-    std::std::cout << sizeof(chPtr) << '\n'; // prints 4
-    std::std::cout << sizeof(iPtr) << '\n';  // prints 4
-    std::std::cout << sizeof(ldPtr) << '\n'; // prints 4
-    
-
-}
-
 /**
  * WARNING: 
  * 
@@ -286,7 +269,19 @@ void handling_pointers(){
  * Any other use of an invalid pointer value is implementation-defined.
  */
 
- void references_pointers::init_pointers(){
+void references_pointers::null_ptrs(){
+    int* ptr_to_int_0; 
+    std::cout << *ptr_to_int_0  << '\n';
+    std::cout << "--------" << '\n';
+    int* ptr_to_int_1 {};
+    std::cout << *ptr_to_int_1 << '\n';
+    std::cout << "--------" << '\n';
+    int* ptr_to_int_2 {nullptr};
+    std::cout << *ptr_to_int_2 << '\n';
+    std::cout << "--------" << '\n';
+}
+
+void references_pointers::init_pointers(){
     int x{ 5 };
 
     int* ptr;        // an uninitialized pointer (holds a garbage address)
@@ -381,7 +376,7 @@ void references_pointers::different_argument_passing(){
 
 /**
  * REMINDER:
- * When we pass the address of a variable as an argument using operator&
+ * When we pass the address of a variable as an argument using the address-of (&) operator
  * we say the variable is passed by address.
  */
 
@@ -424,7 +419,12 @@ void references_pointers::pointer_verification(int * ptr){
     {
         std::cout << *ptr << '\n';
     }
+    else if(ptr == nullptr){
+        std::cout << "El puntero es nullptr" << '\n';
+    }
 }
+
+
 
 void references_pointers::pointer_verification_example()
 {
@@ -564,6 +564,83 @@ void references_pointers::sort2(int& x_out, int& y_out){
 
 }
 
+// Passing by Address 
+
+void references_pointers::passing_by_adress(int* ptr){
+    //El parametro de la funcion es un puntero a constante 
+    std::cout << "Value: "<<*ptr <<'\n';
+    std::cout << "Value address: "<<&(*ptr) <<'\n';
+    std::cout << "Pointer: "<<ptr <<'\n';
+    *ptr += 100; 
+}
+
+void references_pointers::passing_by_address_example(){
+
+    int x {50};
+    int* ptr_to_x{&x}; 
+
+    std::cout << "Value: "<<x <<'\n';
+    std::cout<< "X Address: " << &x << '\n';
+    std::cout << "Pointer: "<<ptr_to_x <<'\n';
+    std::cout<< "------"  << '\n';
+
+    passing_by_adress(ptr_to_x);
+    std::cout<< "------"  << '\n';
+
+    std::cout << "Value: "<<x <<'\n';
+    std::cout<< "X Address: " << &x << '\n';
+
+}
+
+// Return by Address 
+
+int* references_pointers::return_by_address(int* ptr){
+    return ptr; 
+}
+
+const int* references_pointers::return_by_address_const(const int* ptr){
+    return ptr;
+}
+
+void references_pointers::return_by_address_example(){
+
+    int some_number {50};
+
+    int * ptr_to_num = &some_number; 
+
+    std::cout<< "Ptr value: "<<ptr_to_num<<'\n';
+    std::cout<< "Ptr dereferenced value "<<*ptr_to_num<<'\n';
+
+    std::cout<< '\n';
+    std::cout<< "Returning by address and modifying" << '\n';
+
+    int * ptr_2 {return_by_address(ptr_to_num)};
+
+    std::cout<< "Ptr_2 value: "<<ptr_2<<'\n';
+    std::cout<< "Ptr_2 dereferenced value "<<*ptr_2<<'\n';
+
+    std::cout<< '\n';
+    //Como la funcion regresa un puntero modificable es posible modificar el valor por medio de llamar la funcion
+    *return_by_address(ptr_2) = 355; 
+    std::cout << "After modifying dereferenced value " << '\n';
+    
+
+    //Ambos punteros modifican el mismo objeto 
+    std::cout<< "Ptr dereferenced value "<<*ptr_2<<'\n';
+    std::cout<< "Ptr_2 dereferenced value "<<*ptr_2<<'\n';
+
+    //Ahora con punteros constantes 
+    std::cout<< '\n';
+    std::cout << "Using pointer to const " << '\n';
+    const int* ptr_to_const {return_by_address_const(ptr_2)}; 
+
+    std::cout << "Ptr to const  value "<<ptr_to_const<<'\n';
+    std::cout << "Ptr to const dereferenced value "<<*ptr_to_const<<'\n';
+
+    // No es posible por que es un constante
+    // *return_by_address_const(ptr_2)=0;
+    
+}
 
 // int main()
 // {

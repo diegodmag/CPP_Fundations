@@ -51,3 +51,4 @@ El uso del retorno por referencia tiene una advertencia importante: el programad
 
 **WARNING:**
 Los objetos devueltos por referencia deben vivir más allá del alcance de la función que devuelve la referencia, o se producirá una referencia colgante. Nunca devuelve una variable (no estática) local o temporal por referencia.
+

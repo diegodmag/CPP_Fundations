@@ -63,14 +63,14 @@ int main(){
 }
 ```
 
-**[Ver función print_val_and_ref_address_example](../src/ReferencesPointers.cpp#L82)**
+**[Ver función print_val_and_ref_address_example](../src/ReferencesPointers.cpp#L97)**
 
 **Ejecutar función con**`./build/references_and_pointers print_val_and_ref_address_example`
 
 **BES PRACTICE:** Un parametro declarado como referencia constante, tiene las mismas ventajas de acceder al objeto que se está referenciando a la vez que se impide que sea modificado. 
 
 
-**[Ver función const_reference_bidings](../src/ReferencesPointers.cpp#L105)**
+**[Ver función const_reference_bidings](../src/ReferencesPointers.cpp#L123)**
 
 **Ejecutar función con**`./build/references_and_pointers const_reference_bidings`
 
@@ -91,7 +91,7 @@ El operador **de address-of** (&) y el **dereference operator** actúan como opu
 
 **RECORDATORIO:** El *address-of operator* (&) regresa un puntero.
 
-**[Ver función intro_to_pointers](../src/ReferencesPointers.cpp#L178)**
+**[Ver función intro_to_pointers](../src/ReferencesPointers.cpp#L226)**
 
 **Ejecutar función con**`./build/references_and_pointers intro_to_pointers`
 
@@ -221,7 +221,7 @@ Se puede realizar una verificación sobre si un puntero es nulo de la siguiente 
     std::cout << "nullPtr is " << (nullPtr ? "non-null\n" : "null\n"); // implicit conversion to Boolean
 ```
 
-**[Ver función pointer_verification_example](../src/ReferencesPointers.cpp#385)**
+**[Ver función pointer_verification_example](../src/ReferencesPointers.cpp#424)**
 
 **Ejecutar función con**`./build/references_and_pointers pointer_verification_example`
 
@@ -229,7 +229,7 @@ Se puede realizar una verificación sobre si un puntero es nulo de la siguiente 
 **BEST PRACTICE:**
 Un puntero debería o tener asignado un valor válido, es decir, una dirección de un objeto, o estar asignado con `nullptr`.
 
-**WARNING:** Cuando un objeto es destruido, cualquier puntero que estuviera apuntando a ese objeto queda *colgando* (no se asignan a `nullptr`). Es responsabilidad del programador detectar estos casos y asegurarse que esos punteros sean asignados a `nullptr`.
+**WARNING:** Cuando un objeto es destruido, cualquier puntero que estuviera apuntando a ese objeto queda *colgando* (no se asignan a `nullptr`). **Es responsabilidad del programador detectar estos casos y asegurarse que esos punteros sean asignados a** `nullptr`.
 
 **BEST PRACTICE:**
 Favorece el uso de referencias sobre los punteros a menos que alguna de las capacidades adicionales de los punteros sea requerida.
@@ -278,7 +278,7 @@ Al igual que una referencia a `const`, un puntero a `const` también puede apunt
     x = 6; // allowed: the value is still non-const when accessed through non-const identifier x    
 ```
 
-**FINAL REMINDER ABOUT POINTERS AND CONST**
+**Recordatorio sobre const y punteros**
 
 - A un puntero no `const` (`ptr. int* ptr`) se le puede asignar otra dirección para cambiar lo que está señalando.
 - Un puntero `const` (p.e. `int* const ptr`) siempre apunta a la misma dirección, y esta dirección no se puede cambiar.
@@ -303,3 +303,35 @@ int main()
     return 0;
 }
 ```
+
+## Los punteros se pasan por valor 
+
+Cuando tenemos una variable de tipo puntero `* ptr` que almacena la dirección de un objeto, y pasamos a `* ptr` como argumento a un parámetro del mismo tipo, decimos que 
+**el objeto es passado por dirección (address) y el puntero es pasado por valor**. Esto significa que estamos copiando el puntero (pasándo por valor el puntero) que almacena la dirección del objeto, sin embargo la dirección es la misma. 
+
+### Passando punteros
+
+**[Ver función passing_by_address_example](../src/ReferencesPointers.cpp#572)**
+
+**Ejecutar función con**`./build/references_and_pointers passing_by_address_example`
+
+
+
+### Regresando punteros 
+
+Los punteros también pueden ser regresados como `const`, en tal caso el valor `dereferenced` del puntero regresado no puede ser modificado. 
+
+**[Ver función return_by_address_example](../src/ReferencesPointers.cpp#600)**
+
+**Ejecutar función con**`./build/references_and_pointers return_by_address_example`
+
+
+## Por qué regresar por dirección (return by address)? 
+
+Regreso por dirección funciona casi igual que el regreso por referencia, sólo que el objeto regresado es un puntero a un objeto en vez de una referencia. El regreso por dirección tiene la misma **advertencia** que el regreso por referencia: **el objeto devuelto por la dirección debe superar el alcance de la función que devuelve la dirección, de lo contrario el llamante recibirá un puntero colgante**
+
+**La principal ventaja** del retorno de dirección sobre el retorno de referencia es que podemos tener la función de retorno `nullptr` si no hay ningún objeto válido para devolver.
+
+*Por ejemplo, digamos que tenemos una lista de estudiantes que queremos buscar. Si encontramos el estudiante que buscamos en la lista, podemos devolver un puntero al objeto que representa al estudiante correspondiente. Si no encontramos ningún estudiante que coincida, podemos devolver nullptr para indicar que no se encontró un objeto de estudiante correspondiente.*
+
+**La principal desventaja** de devolver por dirección es que el llamante tiene que recordar hacer una comprobación nullptr antes de dereferencing el valor de retorno, de lo contrario puede ocurrir un null pointer dereference y comportamiento indefinido resultará
