@@ -294,27 +294,37 @@ void references_pointers::init_pointers(){
 void references_pointers::handling_const_pointers(){
 
     int x {5}; 
+    std::cout << "x = " << x << '\n';
+
+    int* ptr_to_x {&x};
+    
+    *ptr_to_x = 45;
+
+    std::cout << "x = " << x << '\n';
 
     // int * ptr {&x}; //<< This is not valid 
 
     // POINTER TO CONST 
     
-    const int * ptr {&x}; // We can change the pointer direction but not the value 
-
     const int y = 8; 
 
-    ptr = &y; 
+    const int* ptr_to_y {&y}; 
  
-    //A pointer to const can point to a non-const variable 
+    std::cout<< "Ptr_to_y derefered value " << *ptr_to_y << '\n';
 
     int z {50}; 
 
-    ptr = &z; 
+    ptr_to_y = &z; 
+
+    std::cout<< "Ptr_to_y derefered value " << *ptr_to_y << '\n';
 
     //CONST POINTER 
     //A const pointer is a pointer whose address can not be changed after initialization.
 
     int * const conts_ptr {&z}; 
+
+
+    const int * const conts_ptr_const {&z}; 
 
 }
 
@@ -343,7 +353,7 @@ void references_pointers::print_by_reference(const std::string& ref){
  * while the argument is the value that is pass to that function when is called
  */
 
-void references_pointers::print_by_address(std::string const * ptr){ // The function parameter is a pointer that holds the address of str
+void references_pointers::print_by_address(const std::string * ptr){ // The function parameter is a pointer that holds the address of str
      
     //REMEMBER THERE ARE 
 
@@ -355,14 +365,13 @@ void references_pointers::print_by_address(std::string const * ptr){ // The func
     // Const pointers std::string * const const_ptr 
     // It means, the pointer is pointing to a value and it cannot point to other value 
 
-
     std::cout << *ptr << '\n'; // print the value via the dereferenced pointer
 }
 
 void references_pointers::different_argument_passing(){
     std::string hello {"Hello World"};
 
-    std::string const * conts_ptr {&hello};
+    std::string* conts_ptr {&hello};
 
     print_by_value(hello);
 
@@ -390,21 +399,22 @@ void references_pointers::different_argument_passing(){
  */
 
 void references_pointers::showing_ptr_address(std::string * ptr_str){
-    std::cout << "Pointer is poiting to: "<<*ptr_str << '\n';
+    std::cout << "Pointer derefered value is: "<<*ptr_str << '\n';
+    std::cout << "Pointer value is: "<<ptr_str<<'\n';
     std::cout << "Pointer Address: " << &ptr_str << '\n';
 }
 
 void references_pointers::showing_passing_value_pointers(){
     std::string hello = "Hello World!";
 
-    std::string * ptr_hello; 
+    std::string * ptr_hello {&hello}; 
 
-    ptr_hello = &hello; 
-
-    std::cout << "Pointer is poiting to: "<<*ptr_hello << '\n';
-
+    std::cout << "Pointer derefered value is: "<<*ptr_hello << '\n';
+    std::cout << "Pointer value is: "<<ptr_hello<<'\n';
     std::cout << "Pointer Address: "<<&ptr_hello << '\n';
 
+    std::cout << '\n';
+    
     showing_ptr_address(ptr_hello);
 
 }
@@ -422,6 +432,9 @@ void references_pointers::pointer_verification(int * ptr){
     else if(ptr == nullptr){
         std::cout << "El puntero es nullptr" << '\n';
     }
+    else{
+        std::cout<< "El puntero es nulo o no tiene contenido" << '\n';
+    }
 }
 
 
@@ -433,9 +446,12 @@ void references_pointers::pointer_verification_example()
 
     int * ptr_int_2 {};
 
+    int * ptr_int_3 {nullptr};
+
+
     pointer_verification(ptr_int);
 
-    pointer_verification(ptr_int_2);
+    pointer_verification(ptr_int_3);
 
 }
 

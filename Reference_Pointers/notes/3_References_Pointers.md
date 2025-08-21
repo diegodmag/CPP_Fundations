@@ -180,6 +180,7 @@ int main()
 Un **valor nulo** (*null value*), es un valor especial que significa que algo no tiene valor. Cuando un puntero apunta a un valor nulo, significa que no apunta a nada. Tal puntero se conoce como **puntero nulo**.
 
 ```cpp
+    int* ptr; 
     int* ptr {}; // ptr is now a null pointer, and is not holding an address
 ```
 
@@ -334,4 +335,4 @@ Regreso por dirección funciona casi igual que el regreso por referencia, sólo 
 
 *Por ejemplo, digamos que tenemos una lista de estudiantes que queremos buscar. Si encontramos el estudiante que buscamos en la lista, podemos devolver un puntero al objeto que representa al estudiante correspondiente. Si no encontramos ningún estudiante que coincida, podemos devolver nullptr para indicar que no se encontró un objeto de estudiante correspondiente.*
 
-**La principal desventaja** de devolver por dirección es que el llamante tiene que recordar hacer una comprobación nullptr antes de dereferencing el valor de retorno, de lo contrario puede ocurrir un null pointer dereference y comportamiento indefinido resultará
+**La principal desventaja** de devolver por dirección se requiere hacer una comprobación nullptr antes de dereferencing el valor de retorno, de lo contrario puede ocurrir un null pointer dereference y ocurrir un `undefined behavior`.

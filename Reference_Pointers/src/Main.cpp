@@ -53,6 +53,11 @@ int main(int argc, char* argv[]) {
     else if (comando == "pointer_verification_example") {
         references_pointers::pointer_verification_example();
     }
+    else if (comando == "handling_const_pointers"){
+        references_pointers::handling_const_pointers();
+    }
+
+
     else if (comando == "introduction_to_references") {
         references_pointers::introduction_to_references();
     }
