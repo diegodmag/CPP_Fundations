@@ -194,13 +194,13 @@ namespace MonsterType{
 
 // PAUSED 
 
-int main()
-{
-    MonsterType::MonsterType skeleton {MonsterType::skeleton};
+// int main()
+// {
+//     MonsterType::MonsterType skeleton {MonsterType::skeleton};
 
-    std::cout << "The monster is a " <<  skeleton  << '\n';
+//     std::cout << "The monster is a " <<  skeleton  << '\n';
 
 
 
-    return 0;
-}
+//     return 0;
+// }

@@ -78,9 +78,9 @@ void aggregate_initialization(){
 //     return out;
 // }
 
-int main(){
+// int main(){
 
-    aggregate_initialization();
+//     aggregate_initialization();
  
-    return 0;
-}
+//     return 0;
+// }

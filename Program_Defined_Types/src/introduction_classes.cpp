@@ -12,65 +12,65 @@
   * REMINDER:
   * Because a class is a program-defined data type, it must be defined before it can be used.
   */
-struct Date
-{
-    int year {};
-    int month {};
-    int day {};
+// struct Date
+// {
+//     int year {};
+//     int month {};
+//     int day {};
 
-    void print() // defines a member function named print
-    {
-        std::cout << year << '/' << month << '/' << day << '\n';
-    }
+//     void print() // defines a member function named print
+//     {
+//         std::cout << year << '/' << month << '/' << day << '\n';
+//     }
 
-    void const_print() const // defines a member function named print
-    {
-        std::cout << year << '/' << month << '/' << day << '\n';
-    }
+//     void const_print() const // defines a member function named print
+//     {
+//         std::cout << year << '/' << month << '/' << day << '\n';
+//     }
 
-    void printYear(const Date& date ){
-        std::cout << "The year is :" << date.year << '\n';
-    }
+//     void printYear(const Date& date ){
+//         std::cout << "The year is :" << date.year << '\n';
+//     }
 
-    void incrementYear(){
-        year+=1; 
-    }
+//     void incrementYear(){
+//         year+=1; 
+//     }
 
-    // Compilation erro 
-    // void const_incremment_Year() const 
-    // {
-    //     year+=1; 
-    // }
-};
+//     // Compilation erro 
+//     // void const_incremment_Year() const 
+//     // {
+//     //     year+=1; 
+//     // }
+// };
 
-// Const class objects and const member functions 
-/**
- * When a program-defined type is declared as constant
- * you cannot modified either the member attributes nor 
- * the member functions can modifies attributes 
- */
-void const_struct_example(){
-    Date today { 2020, 10, 14 }; // aggregate initialize our struct
+// // Const class objects and const member functions 
+// /**
+//  * When a program-defined type is declared as constant
+//  * you cannot modified either the member attributes nor 
+//  * the member functions can modifies attributes 
+//  */
+// void const_struct_example(){
+//     Date today { 2020, 10, 14 }; // aggregate initialize our struct
 
-    today.day = 16; // member variables accessed using member selection operator (.)
-    today.print();  // member functions also accessed using member selection operator (.)
+//     today.day = 16; // member variables accessed using member selection operator (.)
+//     today.print();  // member functions also accessed using member selection operator (.)
 
-    today.printYear(today);
+//     today.printYear(today);
 
-    // Compilation error 
+//     // Compilation error 
 
-    // const Date today { 2020, 10, 15 };
+//     const Date today { 2020, 10, 15 };
     
-    // today.incrementYear();
-}
+//     today.incrementYear();
+// }
 
-// WARNING: constant objects may not call non-constant member functions 
-void not_const_calling_member_functions(){
-    const Date today {2020, 10, 15};
+// // WARNING: constant objects may not call non-constant member functions 
+// void not_const_calling_member_functions(){
+//     const Date today {2020, 10, 15};
 
-    today.const_print();
-    // today.print();
-}
+//     today.const_print();
+//     // today.print();
+// }
 
 /**
  * REMINDER:
@@ -258,7 +258,6 @@ class Employee
     int m_age {};
 
 public:
-
     // Employee() = default; 
 
     Employee():
@@ -268,9 +267,9 @@ public:
 
     } 
         
-
 	void setName(std::string_view name) { m_name = name; }
     void setAge(int age){m_age=age;}
+    
     void fillInformation(){
         m_information += "Name: "+ m_name + " Age: " + std::to_string(m_age) + '\n' ;
     }
@@ -310,13 +309,16 @@ void cases_for_data_members_for_rvalue(){
     // Case 1: okay: use returned reference to member of rvalue class object in same expression
 	std::cout << createEmployee("Frank").getName() << '\n';
 
-    // Case 2: bad: save returned reference to member of rvalue class object for use later
-	const std::string& ref { createEmployee("Garbo").getName() }; // reference becomes dangling when return value of createEmployee() is destroyed
-	std::cout << ref << '\n'; // undefined behavior
+    // Case 2: okay: remeber that references can be linked to a rvalue if is 
+	const std::string& ref { createEmployee("Garbo").getName() }; //
+	std::cout << ref << '\n'; //
 
     // Case 3: okay: copy referenced value to local variable for use later
 	std::string val { createEmployee("Hans").getName() }; // makes copy of referenced member
 	std::cout << val << '\n'; // okay: val is independent of referenced member
+
+    std::cout << ref << '\n'; //
+
 }
 
 /**
@@ -389,28 +391,28 @@ void example_of_dangling_reference(){
 
 // EXAMPLE END
 
-int main()
-{
-    Employee emp{};
-    // Employee emp();
+// int main()
+// {
+//     Employee emp{};
+//     // Employee emp();
 
-    emp.fillInformation();
-    std::cout << emp.getInformation() << '\n';
+//     emp.fillInformation();
+//     std::cout << emp.getInformation() << '\n';
 
-    // DateClassWithAccessSpecifier date_not_initialized {};
-    // date_not_initialized.print();
+//     // DateClassWithAccessSpecifier date_not_initialized {};
+//     // date_not_initialized.print();
     
-    // checking_A();
+//     // checking_A();
 
-    // checking_B();
+//     // checking_B();
 
-    // getter_by_const_reference();
+//     // getter_by_const_reference();
 
-    //cases_for_data_members_for_rvalue();
+//     //cases_for_data_members_for_rvalue();
 
-    // example_of_dangling_reference();
+//     // example_of_dangling_reference();
 
 
-    return 0;
-}
+//     return 0;
+// }
 

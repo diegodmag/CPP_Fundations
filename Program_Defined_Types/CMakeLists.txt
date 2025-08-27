@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.24)
 
 # Cmake establece el valor de la variable PROJECT_NAME con "hello_cmake"
-project(project_organization)
+project(intro_classes)
 
 set(CMAKE_CXX_STANDARD 17)
 
