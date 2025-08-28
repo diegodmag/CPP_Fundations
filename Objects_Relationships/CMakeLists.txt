@@ -9,4 +9,6 @@ include_directories(
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/src/Main.cpp
-                               ${PROJECT_SOURCE_DIR}/src/Aggregation.cpp )
+                               ${PROJECT_SOURCE_DIR}/src/Aggregation.cpp
+                               ${PROJECT_SOURCE_DIR}/src/Association.cpp
+                                )

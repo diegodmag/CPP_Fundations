@@ -3,7 +3,7 @@
 #include <functional>
 
 #include "Aggregation.h"
-
+#include "Association.h"
 
 int main(int argc, char* argv[]) {
     
@@ -15,7 +15,9 @@ int main(int argc, char* argv[]) {
     std::string comando = argv[1];
 
     std::unordered_map<std::string, std::function<void()>> comandos = {
-        {"aggregation_example", []{ aggregation_example::aggregation_example(); }}
+        {"aggregation_example", []{ aggregation_example::aggregation_example(); }},
+        {"association_example_1", []{ association_example::association_ejectuion_example(); }}
+        
     };
 
   
