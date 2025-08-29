@@ -8,5 +8,4 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_executable(${PROJECT_NAME} 
                                 ${PROJECT_SOURCE_DIR}/src/Main.cpp
-                                ${PROJECT_SOURCE_DIR}/src/basics/Inheritance.cpp
                                )                               

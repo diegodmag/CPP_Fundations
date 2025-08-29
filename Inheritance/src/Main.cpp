@@ -1,14 +1,30 @@
+
 #include <string>
 #include <unordered_map>
 #include <functional>
 
-#include "basics/Inheritance.h"
+
+// Introduction to Inheritance
 
 #include "basics/Person.h"
 #include "basics/BaseballPlayer.h"
 #include "basics/Employee.h"
 
-void Inheritance_Example();
+// Order of constructio 
+
+#include "construction_order/Base.h"
+#include "construction_order/Derived.h"
+
+// Derived Class Constructors 
+
+#include "construction_order/BasePrivate.h"
+#include "construction_order/DerivedPrivate.h"
+
+void Inheritance_Example(); //Intro inheritance
+
+void Construction_Order_Example(); //Order of constructors 
+
+void Derived_Classes_Constructor_Example();  // Constructors of derived classes 
 
 int main(int argc, char* argv[]) {
     
@@ -20,9 +36,9 @@ int main(int argc, char* argv[]) {
     std::string comando = argv[1];
 
     std::unordered_map<std::string, std::function<void()>> comandos = {
-        {"HelloInheritance", []{ inheritance::HelloInheritance(); }},
-        {"Inheritance_Example", []{ Inheritance_Example();   }}
-        //Inheritance_Example
+        {"Inheritance_Example", []{ Inheritance_Example();   }},
+        {"Construction_Order_Example", []{ Construction_Order_Example();   }},
+        {"Derived_Classes_Constructor_Example", []{ Derived_Classes_Constructor_Example();   }}
     };
 
   
@@ -55,5 +71,27 @@ void Inheritance_Example(){
 
     pepe.printNameAndSalary();
 
+
+}
+
+void Construction_Order_Example()
+{
+
+    std::cout << "Instantiating Base\n";
+    Base base;
+
+    std::cout << "Instantiating Derived\n";
+    Derived derived;
+
+
+}
+
+void Derived_Classes_Constructor_Example(){
+
+    DerivedPrivate derived {50.0, 5}; 
+    
+    std::cout << "Derived id: " << derived.getID() <<'\n';
+
+    std::cout << "Derived cost" << derived.getCost() <<'\n';
 
 }
