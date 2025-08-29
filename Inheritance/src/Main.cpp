@@ -20,11 +20,19 @@
 #include "construction_order/BasePrivate.h"
 #include "construction_order/DerivedPrivate.h"
 
+// From derived folder, in order to show inheritance 
+#include "derived/Persona.h"
+#include "derived/Jugador.h"
+
 void Inheritance_Example(); //Intro inheritance
 
 void Construction_Order_Example(); //Order of constructors 
 
 void Derived_Classes_Constructor_Example();  // Constructors of derived classes 
+
+void Inheritance_Example_2();
+
+void Changing_Behavior_Example();
 
 int main(int argc, char* argv[]) {
     
@@ -38,7 +46,9 @@ int main(int argc, char* argv[]) {
     std::unordered_map<std::string, std::function<void()>> comandos = {
         {"Inheritance_Example", []{ Inheritance_Example();   }},
         {"Construction_Order_Example", []{ Construction_Order_Example();   }},
-        {"Derived_Classes_Constructor_Example", []{ Derived_Classes_Constructor_Example();   }}
+        {"Derived_Classes_Constructor_Example", []{ Derived_Classes_Constructor_Example();   }},
+        {"Inheritance_Example_2", []{ Inheritance_Example_2();   }},
+        {"Changing_Behavior_Example", []{ Changing_Behavior_Example();   }}
     };
 
   
@@ -94,4 +104,15 @@ void Derived_Classes_Constructor_Example(){
 
     std::cout << "Derived cost" << derived.getCost() <<'\n';
 
+}
+
+void Inheritance_Example_2(){
+
+    Jugador piter{20, "Peter", "Parker", 12345, "el_piter"}; 
+
+}
+
+void Changing_Behavior_Example(){
+    Jugador piter{20, "Peter", "Parker", 12345, "el_piter"}; 
+    piter.Saludar();
 }

@@ -228,4 +228,67 @@ En más detalle esto es lo que ocurre:
 9. El constructor de la clase derivada `returns`.
 
 
-Ahora que ya sabemos cómo inicializar una clase derivada con un constructor específico de la clase padre, podemos hacer las `member variables` privadas de nuevo. 
+Ahora que ya sabemos cómo inicializar una clase derivada con un constructor específico de la clase padre, podemos hacer las `member variables` privadas de nuevo.
+
+### Modificador de acceso `protected`
+
+El modificador de acceso `protected` permite permite que los `members` (atributos y funciones) junto con las clases derivadas accedan al `member`. Sin embargo, `members` con el modificador de `protected` no pueden ser accedidos desde fuera de la clase o sus derivados.
+
+```cpp
+class Base
+{
+public:
+    int m_public {}; // can be accessed by anybody
+protected:
+    int m_protected {}; // can be accessed by Base members, friends, and derived classes
+private:
+    int m_private {}; // can only be accessed by Base members and friends (but not derived classes)
+};
+``` 
+
+### Distintos tipos de herencia y su impacto en el acceso 
+
+Hay tres maneras distintas de heradar de una clase, `publica`, `protegida`y `privada`. 
+
+```cpp
+// Inherit from Base publicly
+class Pub: public Base
+{
+};
+
+// Inherit from Base protectedly
+class Pro: protected Base
+{
+};
+
+// Inherit from Base privately
+class Pri: private Base
+{
+};
+
+class Def: Base // Defaults to private inheritance
+{
+};
+```
+
+Cuál es la diferencia? Cuando los `members` son heredados, el modificador de acceso de un `member` heredado puede ser cambiado (sólo en la clase derivada) dependiendo del tipo de herencia utilizado. Visto de otra manera, lmembers que eran `public` o `protected` en la clase base pueden cambiar su modificador de acceso en la clase derivada. 
+
+Consideremos las siguientes reglas: 
+
+- Una clase siempre puede acceder a sus propios (no heradados) `members`.
+- Una clase derivada accede a `members` heredados basada en el especificador de acceso de la clase base. Esto varía dependiendo del tipo de especificador de acceso y el tipo de herencia utilizada. 
+
+### `Public` Inheritance
+
+Es el tipo más común de herencia usada y rara vez se usa otra que no sea `public`. Cuando se hereda de una clase usando el especificador de acceso `public`, los `public members` de la clase base heredados permanecen `public` y lo mismo ocurre con los `protected members`. Los `private members`, los cuales eran innaccesibles por que eran privados en la clase base, permanecen innaccesibles. 
+
+| Access specifier in base class | Access specifier when inherited publicly |
+|-----------------------|-------------------------------|
+| Public                | Public                       |
+| Protected             | Protected                    |
+| Private               | Inaccessible  
+
+**BEST PRACTICE:** En general, usa herencia pública. 
+
+
+### Cambiando comportamiento en las clases derivadas 
