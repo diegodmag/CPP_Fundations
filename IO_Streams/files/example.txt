@@ -1,0 +1,9 @@
+A
+42
+Hola Mundo
+C	0
+A	1
+D	2
+E	3
+N	4
+A	5
