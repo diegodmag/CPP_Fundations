@@ -13,16 +13,18 @@ int main(){
     }
     
     
-    std::vector<int> graveyard {};
-
-    Exercises::vector_printer(ids); 
+    // std::vector<int> graveyard {};
+    // Exercises::vector_printer(ids); 
     
     // Exercises::card_dealer(ids);
-    Exercises::discardHand(ids, graveyard); 
-    Exercises::vector_printer(graveyard); 
+    // Exercises::discardHand(ids, graveyard); 
+    // Exercises::vector_printer(graveyard); 
     
-    std::vector<int> damages = {55, 78, 22, 33}; 
-    Exercises::damage_validator(damages, 5); 
+    // std::vector<int> damages = {55, 78, 22, 33}; 
+    // Exercises::damage_validator(damages, 5); 
+
+    std::vector<int> dmgs = {-1, -2,5, -3, 2, 44, -22, 7, -9}; 
+    Exercises::selective_buffer(dmgs); 
 
 
 }

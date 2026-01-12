@@ -1,6 +1,7 @@
 #include "Exercises.h"
 
 #include <vector>
+#include <ranges> // to use filter 
 
 //This is a template function 
 template<typename T>
@@ -64,7 +65,7 @@ void Exercises::discardHand(std::vector<int>& hand, std::vector<int> graveyard){
 void Exercises::damage_validator(std::vector<int>& damages, int index){
     try
     {
-        damages.at(index); 
+        damages.at(index); // Try to get the element 
 
         std::cout<<"The card at index "<<index<<" makes an attack, doing "<<damages.at(index)<<" of damage\n";    
     }
@@ -74,4 +75,49 @@ void Exercises::damage_validator(std::vector<int>& damages, int index){
         std::cerr << e.what() << '\n';
     }
     
+}
+
+/// 4 
+
+void Exercises::card_filter(std::vector<int>& hand){
+
+    auto positives = [](int n){return n>0;}; 
+    
+    // Here, it is importanta to highlight (or note) that THERE IS NOT MEMORY ALLOCATIO when 
+    // the view is created, the onlyPositiveAttacks object, only stores a reference to the 
+    // initial vector and the filter 
+
+    auto onlyPositiveAttacks = std::views::filter(hand, positives); 
+    // Views -views- only execute the filter when someone tries to read the data 
+    
+    std::cout<<"Positives attacks detected\n"; 
+    for(const auto& attack: onlyPositiveAttacks){
+        std::cout<<"Attack: "<<attack<<'\n'; 
+    }
+    
+}
+
+/// 4.5 
+void Exercises::selective_buffer(std::vector<int>& damages){
+
+    //First, we stablish the lambdas 
+    //
+    auto positives = [](int n){return n>0;};
+    // 
+    auto doubled = [](int n){return n*2;}; 
+
+    auto onlyPositives = std::views::filter(damages, positives); 
+
+    auto doublePositives = std::views::transform(onlyPositives, doubled); 
+
+    std::cout<<"The followings are the positive numbers: \n"; 
+    for(const auto& view : onlyPositives){
+        std::cout<<view<<' '; 
+    }
+    std::cout<<"\n"; 
+    std::cout<<"The followings are the double of those positives numbers: \n"; 
+    for(const auto& view : doublePositives){
+        std::cout<<view<<' '; 
+    }
+    std::cout<<"\n"; 
 }
