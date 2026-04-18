@@ -23,8 +23,11 @@ int main(){
     // std::vector<int> damages = {55, 78, 22, 33}; 
     // Exercises::damage_validator(damages, 5); 
 
-    std::vector<int> dmgs = {-1, -2,5, -3, 2, 44, -22, 7, -9}; 
-    Exercises::selective_buffer(dmgs); 
-
+    // std::vector<int> dmgs = {-1, -2,5, -3, 2, 44, -22, 7, -9}; 
+    // Exercises::selective_buffer(dmgs); 
+    
+    std::vector<int> atcks = {20, 22, 26, 18, 19 , 33, 12}; 
+    int defense = 20; 
+    Exercises::powerful_atcks_filter(atcks, defense); 
 
 }

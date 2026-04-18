@@ -102,6 +102,7 @@ void Exercises::selective_buffer(std::vector<int>& damages){
 
     //First, we stablish the lambdas 
     //
+    // In lambdas the capture block ([])
     auto positives = [](int n){return n>0;};
     // 
     auto doubled = [](int n){return n*2;}; 
@@ -120,4 +121,38 @@ void Exercises::selective_buffer(std::vector<int>& damages){
         std::cout<<view<<' '; 
     }
     std::cout<<"\n"; 
+}
+
+void Exercises::powerful_atcks_filter(std::vector<int>& atcks, int defense){
+    
+    // lambda
+    auto filter = [defense](int n){return n>=defense;}; 
+    // view 1 
+    auto powerful_atcks = atcks | std::views::filter(filter) | std::views::reverse; 
+     
+    
+    std::cout<<"The attacks that surpass the defense "<<defense<<" are...\n"; 
+    for(const auto& atck: powerful_atcks){
+        std::cout<<atck<<'\t'; 
+    }   
+    std::cout<<'\n'; 
+}
+
+void Exercises::filtering_cards(std::vector<int>& costs){
+
+    // Only filter odd numbers 
+    // 1 Create the lambda 
+    auto odd = [](int n){return n%2 ==0;};
+    
+    // Sort them from greater to shorter 
+
+    // Take only two elements 
+    
+    auto filtered_cards = costs | std::views::filter(odd) | std::views::reverse | std::views::take(2); 
+    
+    std::cout<<"The elements that achieve the requierements are ...\n";
+    for(const auto& card: filtered_cards){
+        std::cout<<"Card "<<card<<'\t'; 
+    }
+    std::cout<<'\n'; 
 }

@@ -10,7 +10,7 @@ namespace Exercises{
     
     // Vector Printer 
     void vector_printer(std::vector<int>& vector); 
-    
+
     // 1 Card dealer 
     void card_dealer(std::vector<int>& ids);  
 
@@ -25,7 +25,11 @@ namespace Exercises{
 
     // Since here, we try other exercises so that we can practice the filter 
     ///     4.5 
-    void selective_buffer(std::vector<int>& damages); 
+        void selective_buffer(std::vector<int>& damages); 
+
+        void powerful_atcks_filter(std::vector<int>& atcks, int defense); 
+
+        void filtering_cards(std::vector<int>& atcks); 
 };
 
 #endif
